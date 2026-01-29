@@ -21,6 +21,7 @@ class HomeViewModel @Inject constructor(
     fun getPosts(){
         viewModelScope.launch {
             _loading.postValue(true)
+            println("Getting post")
             val posts = postRepository.getPosts()
             _loading.postValue(false)
             println("posts: $posts")

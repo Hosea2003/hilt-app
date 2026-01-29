@@ -1,8 +1,8 @@
 package com.example.hiltapp.data.dto
 
 data class PostDto(
-    val id: String,
+    val id: Int,
     val title: String,
-    val author: String,
-    val createdAt: String
+    val userId:String,
+    val body: String
 )

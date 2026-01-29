@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -12,6 +13,8 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
     val viewmodel = hiltViewModel<HomeViewModel>()
+    val loading = viewmodel.loading.observeAsState()
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -22,7 +25,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 viewmodel.getPosts()
             }
         ) {
-            if(viewmodel.loading.value == true){
+            if(loading.value==true){
                 Text(text = "Loading...")
             }
             else{

@@ -1,17 +1,19 @@
 package com.example.hiltapp.data.repository
 
+import com.example.hiltapp.data.service.ApiPostService
 import com.example.hiltapp.domain.model.Post
+import com.example.hiltapp.domain.model.toPost
 import com.example.hiltapp.domain.repository.PostRepository
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
-class PostRepositoryImp @Inject constructor(): PostRepository {
+class PostRepositoryImp @Inject constructor(
+    val postApiService: ApiPostService
+): PostRepository {
     override suspend fun getPosts(): List<Post> {
-        delay(1000)
-        return listOf(
-            Post(id = "1", title = "title 1"),
-            Post(id = "2", title = "title 2"),
-            Post(id = "3", title = "title 3")
-        )
+        val post =  postApiService
+                .getPosts()
+            .map { postDto ->  postDto.toPost() }
+        return post
     }
 }

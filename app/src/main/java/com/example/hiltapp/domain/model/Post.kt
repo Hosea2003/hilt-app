@@ -9,7 +9,7 @@ data class Post(
 
 fun PostDto.toPost(): Post {
     return Post(
-        id = id,
+        id = id.toString(),
         title = title
     )
 }
